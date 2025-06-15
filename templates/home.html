@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cartelera de Cine</h1>
+<div class="row">
+    {% for movie in movies %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ movie.poster_url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 400px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text">{{ movie.director }}</p>
+                <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary">Ver Funciones</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay películas en cartelera.</p>
+    {% endfor %}
+</div>
+{% endblock %}

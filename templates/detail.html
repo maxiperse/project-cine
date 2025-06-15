@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ movie.poster_url }}" class="img-fluid" alt="{{ movie.title }}">
+    </div>
+    <div class="col-md-8">
+        <h1>{{ movie.title }}</h1>
+        <p><strong>Director:</strong> {{ movie.director }}</p>
+        <p><strong>Fecha de Estreno:</strong> {{ movie.release_date }}</p>
+        <hr>
+        <p>{{ movie.description }}</p>
+        <hr>
+        <h3>Funciones Disponibles</h3>
+        <ul>
+            {% for showtime in movie.showtime_set.all %}
+            <li>{{ showtime.showtime|date:"d M Y, H:i" }} - ({{ showtime.available_seats }} asientos disponibles)</li>
+            {% empty %}
+            <li>No hay funciones programadas para esta película.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<a href="/" class="btn btn-secondary mt-3">Volver a la cartelera</a>
+{% endblock %}
